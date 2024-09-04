@@ -1,0 +1,103 @@
+
+.kol {
+    background: url(https://4kwallpapers.com/images/wallpapers/nebulae-cosmic-stars-dark-blue-dark-background-digital-5120x2880-3926.jpg) fixed;
+}
+.wellcome {
+    background:rgb(52, 27, 57) ;
+    margin-left: calc(52vw - 117px);
+    margin-right: calc(50vw - 117px);
+    text-align: center;
+    border-radius:4px;
+    color: azure;
+}
+.contacts{
+color: beige;
+background:indigo ;
+margin-left: calc(54.25vw - 130px); 
+margin-right: calc(51.75vw - 130px); 
+padding-right: 5%;
+padding-left: 5%;
+font-size: large;
+display: flex;
+justify-content: center;
+margin-bottom: 0.05%;
+text-decoration: solid;
+border-radius:1px;
+transition: 0.5s;
+}
+
+
+.contacts:hover{
+    background-color:grey ;
+    margin-left: calc(54vw - 130px); 
+    margin-right: calc(51.5vw - 130px); 
+    transition: 0.5s;
+}
+
+
+.homebutton{
+margin-left: 96%;
+margin-top: 1%;
+background-color: rgb(146, 121, 226);
+border-radius:4px;
+
+}
+.search{
+    color: aqua;
+    margin-left: 3.5vw;
+    text-decoration: solid;
+    background:rgb(32, 22, 97) ;
+    border-radius:4px;
+    padding: 4px;
+    transition: 0.5s;
+}
+.search:hover{
+transition: 0.5s;
+background:rgb(64, 16, 74) ;
+}
+
+@media(width<=1250){
+    .contacts{
+        margin-left: calc(58.25vw - 130px); 
+        margin-right: calc(55.75vw - 130px); 
+        justify-content: center;
+        margin-bottom: 0.12%;
+        }
+       
+
+}
+
+@media(width<=900px){
+    .contacts{
+        margin-left: calc(58.25vw - 130px); 
+        margin-right: calc(55.75vw - 130px); 
+        justify-content: center;
+        margin-bottom: 0.12%;
+        }
+}
+
+@media(width<=600px){
+    .contacts{
+        margin-left: calc(61.25vw - 130px); 
+        margin-right: calc(58.75vw - 130px); 
+        justify-content: center;
+        margin-bottom: 0.15%;
+       }
+}
+
+@media(width<=500px){
+    .contacts{
+        margin-left: calc(63.25vw - 130px); 
+        margin-right: calc(60.75vw - 130px); 
+        justify-content: center;
+        margin-bottom: 0.2%;
+        }
+}
+@media(width<=400px){
+    .contacts{
+        margin-left: calc(66.25vw - 130px); 
+        margin-right: calc(63.75vw - 130px); 
+        justify-content: center;
+        margin-bottom: 0.25%;
+       }
+ }

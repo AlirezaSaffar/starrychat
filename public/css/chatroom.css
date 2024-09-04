@@ -1,0 +1,119 @@
+    .kol {
+     background: url(https://s2.uupload.ir/files/photo2_vl1.jpg);
+    }
+    .chatbox {
+     margin-top: 10%;
+     background:  linear-gradient(253deg , rgba(16, 7, 47,0.9)  , rgba(17, 8, 48,0.9) ) , url(https://s2.uupload.ir/files/photo3_a733.jpg) 0px 0px/cover ;
+     height: 150%;
+     color: bisque;  
+     margin-left: 9%;
+     margin-right: 7.55%;
+     border-radius: 6px;
+    }
+    .wellcome {
+     text-align: center;
+     color: azure;
+    }
+    .wellcomeee {
+     margin-right: 45vw;
+     margin-left: 47vw;
+     font-size: xx-large;
+     color: azure;
+     
+    }
+    .me {
+     font-family: Vazirmatn;
+     background-color:tan;
+     width:fit-content;
+     text-align: right;
+     margin-left:auto;
+     color: black;
+     font-size: 20px;
+     margin-bottom: 0.8%;
+     margin-top: 0%;
+     border-top-left-radius: 6px;
+     border-bottom-left-radius: 6px;
+   }
+    .client {
+     width:fit-content;
+     background-color: darkcyan;
+     text-align: left;
+     font-family: Vazirmatn;
+     color: black;
+     font-size: 20px;
+     margin-top: 0%;
+     margin-bottom: 0.8%;
+     border-top-right-radius: 6px;
+     border-bottom-right-radius: 6px;
+    }
+    .input {
+     width: calc(94% - 7.5vw - 65px ) ;
+     text-align: right;
+     margin-right: 6%;
+     border-radius: 6px;
+     }
+    .buttonn {
+        width: fit-content;
+        margin-left: 31.5%;
+        border-radius:3px;
+        border: 0px;
+        background-color: rgb(9, 99, 96);
+        color: rgb(255, 255, 255);
+        
+    }
+    .send {
+      margin-left: 7.5vw;
+      width: 48px;
+      display:inline-flexbox;
+      border-radius:3px;
+      border: 0px;
+      background-color: rgb(9, 99, 96);
+      color: white;
+    }
+    
+    @media( 700px<width<=900PX){
+        .buttonn {
+     margin-left: 31%;
+    }
+    }
+    @media( 500px<width<=700PX){
+        .buttonn {
+    margin-left: 29%;
+    }
+    }
+    @media( 400px<width<=500PX){
+        .buttonn {
+    margin-left: 26%;
+    }
+    }
+    @media( 342px<width<=400PX){
+        .buttonn {
+     margin-left: 24%;
+    }
+    }
+    @media( 300px<=width<=342PX){
+        .buttonn {
+     margin-left: 23%;
+    }
+    }
+    @media(width<=1275px){
+         .wellcomeee {
+        margin-left: calc(55vw - 117px);
+        }
+        }
+    @media(width<=900px){
+    .wellcomeee {
+    margin-left: calc(60vw - 117px);
+   }
+    }
+    @media(width<=575px){
+        .wellcomeee {
+        margin-left: calc(64.5vw - 117px);
+       }
+        }
+    
+        @media(width<=388px){
+            .wellcomeee {
+            margin-left: calc(69vw - 117px);
+           }
+        }

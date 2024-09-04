@@ -1,0 +1,38 @@
+.kol {
+    background: url(https://4kwallpapers.com/images/wallpapers/nebulae-cosmic-stars-dark-blue-dark-background-digital-5120x2880-3926.jpg) fixed;
+}
+.gohome{
+    margin-left: 4vw;
+    background-color: rgb(146, 121, 226);
+  }
+  .homebutton{
+    margin-left: 4%;
+    background-color: rgb(146, 121, 226);
+    border-radius:4px;
+    }
+    .other{
+        color: aqua;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color:rgb(35, 48, 73);
+        margin-left: 1.5vw;
+        margin-bottom: 0.1%;
+        font-size: x-large;
+        border-radius:2px;
+    }
+    .other:hover{
+        background-color:rgb(59, 79, 118);
+        transition: 0.5s;
+    }
+    .pic{
+        margin-left: 42%;
+        display: flex;
+        justify-content: center;
+        width: 20% ;
+        height: 20% ;
+    }
+    .img{
+        border: 3px solid black;
+        background-size: cover;
+        width: 250px;
+        height: 280px;
+    }
