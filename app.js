@@ -43,10 +43,6 @@ app.get("/users/settings", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "setting.html"))
 })
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "index.html"))
-})
-
 app.post("/api/users/refresh", userscontroler.refresh) 
 
 app.post("/api/users/chatroom", userscontroler.sendmessage) 
