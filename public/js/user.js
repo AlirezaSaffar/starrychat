@@ -32,7 +32,7 @@ for(var i=0;i<cki.length;i++){
   if(ch=='='){break;}
 }
 var c=cki.substring(i)
-console.log(c)
+document.getElementById('Title').innerHTML="user | "+c;
 fetch("/api/users/user", {
     method: "POST",
     headers: {
