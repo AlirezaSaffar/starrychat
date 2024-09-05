@@ -29,7 +29,7 @@ for(var i=0;i<cki.length;i++){
   if(ch=='='){break;}
 }
 var c=cki.substring(i)
-//setcookie("contact",c,1)
+document.getElementById('Title').innerHTML="chatroom | "+c;
 
 
             function refresh(){
