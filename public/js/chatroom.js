@@ -33,6 +33,12 @@ document.getElementById('Title').innerHTML="chatroom | "+c;
 
 
             function refresh(){
+           var i;
+           var myvar;
+           var hervar;                        
+           myvar= document.getElementsByClassName('me');
+           hervar= document.getElementsByClassName('client');
+                
                 fetch("/api/users/refresh", {
                     method: "POST",
                     headers: {
@@ -50,23 +56,21 @@ document.getElementById('Title').innerHTML="chatroom | "+c;
                   }).then(user =>{
                    ar=user.messages
                    ss=user.sw
-                   var i;
+                   
                    var j;
                    if(ar.length>26){
                        j=ar.length-26;
                    }else{j=0;}
-           var myvar;
-           var hervar;             
-           myvar= document.getElementsByClassName('me');
-           hervar= document.getElementsByClassName('client');
            if (ar.length<26){k=ar.length;}else{k=26;}
            
                    for(i=0;i<k;i++){
                        if(ss[j]==true){
                            myvar[i].innerHTML= ar[j];
-           
+                           hervar[i].innerHTML="";
+                        
                        }else{
-                           hervar[i].innerHTML= ar[j];}
+                           hervar[i].innerHTML= ar[j];
+                           myvar[i].innerHTML="";}
                        j++;
                        }
 
@@ -100,7 +104,11 @@ function exit(){
              message = document.getElementById('mas').value;
              var sender= getcookie("login");
              var cki =window.location.href;
-             var c=cki.substring(46);
+            for(var i=0;i<cki.length;i++){
+             var ch=cki.charAt(i-1);
+             if(ch=='='){break;}
+              }
+             var c=cki.substring(i)
              var receiver=c;
              fetch("/api/users/chatroom", {
                 method: "POST",
