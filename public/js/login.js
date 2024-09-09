@@ -49,7 +49,7 @@ function login() {
    
     return response.json();
   }).then(user =>{
-    console.log(user);
+    
     if(user==false){
       alert('your password is incorrect');
       document.getElementById("password").value="";
