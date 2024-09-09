@@ -37,7 +37,7 @@ function exit(){
   function search(){
     var me = getcookie("login");
     var friend = document.getElementById("username").value;
-    console.log(friend);
+    
     fetch("/api/users/search", {
         method: "POST",
         headers: {
