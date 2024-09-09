@@ -22,7 +22,6 @@ function getcookie(name) {
     return " ";
   }
 var mywidth=window.screen.width;
-console.log(mywidth)
 if(mywidth<393){
   var newelement=document.createElement('br');
   var ael=document.getElementsByTagName('a');
