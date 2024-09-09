@@ -12,26 +12,31 @@
     margin-left: 51vw;
     width: 6vw;
     border-radius:6px;
+    height: 30px;
   }
   .wellcom1 {
     
     margin-left: calc(53vw - 117px);
     color: blanchedalmond;
     text-align: center;
+    font-size: large;
   }
   .in {
     width: 150px;
     border-radius:4px;
+    height: 20px;
   }
   .homebutton{
     margin-left: 92%;
     background-color: rgb(146, 121, 226);
     border-radius:4px;
+    height: 25px;
   }
   .gohome{
     margin-left: 4vw;
     background-color: rgb(146, 121, 226);
     border-radius:4px;
+    height: 25px;
   }
   @media(width<=1275px){
     .bb{
