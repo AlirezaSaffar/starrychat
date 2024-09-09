@@ -3,9 +3,9 @@ const express = require("express")
 const messages = require('../models/messages')
 const { ObjectId } = require('mongodb')
 const joi = require("joi")
-const loadash = require("lodash")
 const bycrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const mongoose = require("mongoose");
 class userscontroler{
     static signup = async(req,res)=>{
         var i;
@@ -60,7 +60,7 @@ class userscontroler{
     static search = async(req,res)=>{
       var i;
       var txt,check;
-check=false;
+      check=false;
       try{
     var n = jwt.verify(req.body.me,"mysecretkey58963")
     }catch(err){
@@ -80,12 +80,11 @@ var contacts = t.split('-');
 for(i in contacts){
   if(contacts[i]==n){ 
     res.json("you already have this member in your contacts").send()
-    return}
+    return;}
 }
 t= t+"-"+n;
+
 await user.updateOne({ username:req.body.friend},{ $set: {contacts: t} } );
-
-
 
 for(i in us){
   if(us[i]["username"]==n){
@@ -102,13 +101,36 @@ res.json("you added a new contact").send()
 }
 
     static sendmessage =async(req,res)=>{
-var sender= jwt.verify(req.body.sender,"mysecretkey58963")
+var sender= jwt.verify(req.body.sender,"mysecretkey58963");
+var user1= sender;
+var user2=req.body.receiver;
+var whofirst=0;
+var j;
+if(user2.length>user1.length){whofirst=2;}
+if(user2.length<user1.length){whofirst=1;}
+if(user2.length==user1.length){
+  for(j=0;j<user1.length;j++){
+    if(user1.charAt(j)>user2.charAt(j)){
+      whofirst=1;
+      break;
+    }
+    if(user1.charAt(j)<user2.charAt(j)){
+      whofirst=2;
+      break;
+    }
+
+  }
+}
+var tablename;
+if(whofirst==1){tablename=user1+"-"+user2;}
+if(whofirst==2){tablename=user2+"-"+user1;}
+var chatroomtable= mongoose.model(tablename,messages);
 var newmessage ={
   message:req.body.message,
   sender:sender,
   receiver:req.body.receiver
 }
-const newtable = new messages(newmessage);
+const newtable = new chatroomtable(newmessage);
         try{
          await newtable.save();
       }catch{
@@ -134,11 +156,34 @@ const newtable = new messages(newmessage);
     }
 
     static refresh=async(req,res)=>{
-var mess= await messages.find()
+var sender=jwt.verify(req.body.sender,"mysecretkey58963")
+var j;
+var whofirst=0;
+var user1= sender;
+var user2=req.body.receiver;
+if(user2.length>user1.length){whofirst=2;}
+if(user2.length<user1.length){whofirst=1;}
+if(user2.length==user1.length){
+  for(j=0;j<user1.length;j++){
+    if(user1.charAt(j)>user2.charAt(j)){
+      whofirst=1;
+      break;
+    }
+    if(user1.charAt(j)<user2.charAt(j)){
+      whofirst=2;
+      break;
+    }
+
+  }
+}
+var tablename;
+if(whofirst==1){tablename=user1+"-"+user2;}
+if(whofirst==2){tablename=user2+"-"+user1;}
+var chatroomtable= mongoose.model(tablename,messages);
+var mess= await chatroomtable.find();
 var sw=new Array();
 var messarray=new Array();
 var i;
-var sender=jwt.verify(req.body.sender,"mysecretkey58963")
 var receiver= req.body.receiver
 var k=0;
 for(i in mess){
@@ -154,11 +199,11 @@ if(mess[i]["receiver"]==sender&&mess[i]["sender"]==receiver){
 }
 
 }
-var messsend={
+var refreshedmessages={
   messages: messarray,
   sw:sw
 }
-res.json(messsend).send();
+res.json(refreshedmessages).send();
 
     }
 
