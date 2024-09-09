@@ -121,7 +121,7 @@ function exit(){
                     sender: sender,
                     receiver:receiver
                 }),
-              }).then((res) => {console.log(res)});           
+              }).then((res) => {});           
 document.getElementById('mas').value=""; 
 
 }
