@@ -37,6 +37,7 @@ transition: 0.5s;
 
 .homebutton{
 margin-left: 96%;
+height: 25px;
 margin-top: 1%;
 background-color: rgb(146, 121, 226);
 border-radius:4px;
