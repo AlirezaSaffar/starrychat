@@ -1,14 +1,11 @@
 .kol {
     background: url(https://4kwallpapers.com/images/wallpapers/nebulae-cosmic-stars-dark-blue-dark-background-digital-5120x2880-3926.jpg) fixed;
 }
-.gohome{
-    margin-left: 4vw;
-    background-color: rgb(146, 121, 226);
-  }
   .homebutton{
     margin-left: 4%;
     background-color: rgb(146, 121, 226);
     border-radius:4px;
+    height: 25px;
     }
     .other{
         color: aqua;
