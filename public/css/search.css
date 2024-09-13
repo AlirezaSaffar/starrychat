@@ -15,11 +15,11 @@
     height: 30px;
   }
   .wellcom1 {
-    
     margin-left: calc(53vw - 117px);
     color: blanchedalmond;
     text-align: center;
     font-size: large;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
   .in {
     width: 150px;
