@@ -7,62 +7,12 @@ const bycrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose");
 class userscontroler{
-    static signup = async(req,res)=>{
-        var i;
-        var us = await user.find();
-       const schema ={
-        username : joi.string().min(4).max(50).required(),
-        password :joi.string().min(4).max(50).required()
-}
-          var hashpassword = await bycrypt.hash(req.body.password,10)
-          var check=true;
-          var isvalid= joi.object(schema).validate(req.body)
-          for(i in us){
-              if(us[i]["username"]==req.body.username){check = false;}
-          }
-          var data=true;
-          if(check){
-           if(isvalid.error) return
-            var newuserdata= {
-              username:req.body.username,
-              password:hashpassword
-            }
-          const newuser = new user(newuserdata);
-        try{
-         await newuser.save();
-      }catch{
-          console.log("err")
-        } 
-           }else{
-             data = false;
-           }
-           var js= {d :data}
-           res.json(js).send()
-}
-
-    static login = async(req,res)=>{
-        var i;
-        var us = await user.find();
-        var check = false;
-        for(i in us){
-            if(us[i]["username"]==req.body.username){
-              check = bycrypt.compareSync(req.body.password,us[i]["password"]);
-           }
-        }
-        if(check){
-         var token= jwt.sign(req.body.username,"mysecretkey58963");
-         }else{
-         var token = false;
-        }
-         res.json(token).send();
-}
-
     static search = async(req,res)=>{
       var i;
       var txt,check;
       check=false;
       try{
-    var n = jwt.verify(req.body.me,"mysecretkey58963")
+    var n = req.verifieduser
     }catch(err){
       console.log(err)
     }
@@ -79,7 +29,7 @@ class userscontroler{
 var contacts = t.split('-');
 for(i in contacts){
   if(contacts[i]==n){ 
-    res.json("you already have this member in your contacts").send()
+    res.json("you already have this member in your contacts")
     return;}
 }
 t= t+"-"+n;
@@ -94,14 +44,14 @@ break;
 }
 t=t+"-"+req.body.friend;
 await user.updateOne({ username:n },{ $set: {contacts: t} } );
-res.json("you added a new contact").send()
-      }else{ res.json("there is no contact with this name").send()  }
+res.json("you added a new contact")
+      }else{ res.json("there is no contact with this name")  }
 
 
 }
 
     static sendmessage =async(req,res)=>{
-var sender= jwt.verify(req.body.sender,"mysecretkey58963");
+var sender= req.verifieduser
 var user1= sender;
 var user2=req.body.receiver;
 var whofirst=0;
@@ -141,22 +91,23 @@ const newtable = new chatroomtable(newmessage);
 }
 
     static showcontacts= async(req,res)=>{
+      var verifieduser= req.verifieduser
       var us = await user.find();
       var i;
       for(i in us){
-        if(us[i]["username"]==jwt.verify(req.body.name,"mysecretkey58963")){
+        if(us[i]["username"]==verifieduser){
           var txt = us[i]["contacts"];
           break;
         }     }
         var data={
           txt:txt,
-          name:jwt.verify(req.body.name,"mysecretkey58963")
+          name:verifieduser
         }
-        res.json(data).send();
+        res.json(data);
     }
 
     static refresh=async(req,res)=>{
-var sender=jwt.verify(req.body.sender,"mysecretkey58963")
+var sender=req.verifieduser
 var j;
 var whofirst=0;
 var user1= sender;
@@ -203,31 +154,13 @@ var refreshedmessages={
   messages: messarray,
   sw:sw
 }
-res.json(refreshedmessages).send();
+res.json(refreshedmessages);
+}
 
-    }
-
-    static userinfo=async(req,res)=>{
-     var name= req.body.name;
-     var us=await user.find();
-     var i;
-     for(i in us){
-      if(us[i]["username"]== name){
-        var data = {
-          bio: us[i]["bio"],
-          birthyear : us[i]["birthyear"],
-          favorites : us[i]["favorites"],
-          url:us[i]["profile"]
-
-        }
-        break;
-      }
-     }
-res.json(data).send();
-    }
+    
 
     static settings=async(req,res)=>{
-      var name= jwt.verify(req.body.name,"mysecretkey58963");
+      var name= req.verifieduser
       
           if(req.body.arr[0]){
             await user.updateOne({ username:name},{ $set: {password: req.body.pass  } } );

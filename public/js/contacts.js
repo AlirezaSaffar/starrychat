@@ -4,101 +4,69 @@ function setcookie(name, value, exday) {
   var exp = "expires=" + date.toGMTString();
   document.cookie = name + "=" + value + ";" + exp + ";path=/";
 }
+
 function getcookie(name) {
-    var nmae = +"=";
-    var decodecookie = decodeURIComponent(document.cookie);
-    var x = decodecookie.split(";");
-    var i;
-    var xx;
-    for (i = 0; i < x.length; i++) {
-      xx = x[i];
-      while (xx.charAt(0) == " ") {
-        xx = xx.substring(1);
-      }
-      if (xx.indexOf(name) == 0) {
-        return xx.substring(name.length + 1);
-      }
-    }
-    return " ";
+  var cname = name + "=";
+  var decoded = decodeURIComponent(document.cookie);
+  var parts = decoded.split(";");
+  for (var i = 0; i < parts.length; i++) {
+    var c = parts[i].trim();
+    if (c.indexOf(cname) === 0) return c.substring(cname.length);
   }
-var mywidth=window.screen.width;
-if(mywidth<393){
-  var newelement=document.createElement('br');
-  var ael=document.getElementsByTagName('a');
+  return "";
+}
+
+var mywidth = window.screen.width;
+if (mywidth < 393) {
   var element = document.getElementById("kolbody");
-  element.insertBefore(newelement,ael[2]);
-  newelement=document.createElement('br');
-  element.insertBefore(newelement,ael[2]);
+  var ael = document.getElementsByTagName("a");
+  var br = document.createElement("br");
+  element.insertBefore(br, ael[2]);
+  br = document.createElement("br");
+  element.insertBefore(br, ael[2]);
 }
-var check=true;
-var mycheck = getcookie("login");
-if (mycheck == " ") {
+
+var token = getcookie("login");
+if (!token) {
   window.location.assign("/users/login");
-  check =false;
+} else {
+  fetch("/api/users/contacts", {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer " + token
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      var username = data.name;
+      document.getElementById("myprofile").href = "/users/user?nameuser=" + username;
+      var cons = data.txt.split("-");
+      var element = document.getElementById("kolbody");
+      var x = document.getElementById("divcon");
+      for (var i = 1; i < cons.length; i++) {
+        var a = document.createElement("a");
+        a.href = "/users/chatroom?nameuser=" + cons[i];
+        a.className = "contacts";
+        a.innerHTML = cons[i];
+        element.insertBefore(a, x);
+      }
+    });
 }
 
-
-var username= getcookie("login");
-if(check){
-fetch("/api/users/contacts", {
- method: "POST",
- headers: {
-   Accept: "application/json",
-   "Content-Type": "application/json",
- },
- body: JSON.stringify({
-   name:username
- }),
-}).then(response=>{
-
- return response.json()}).then(date=>{
-var username = date.name;
-document.getElementById("myprofile").href="/users/user?nameuser="+username;
-var cons=date.txt.split('-');
-var sw=0;
-for(var i=1;i<cons.length;i++){
-  var para=document.createElement('a');
-  para.setAttribute("onclick","")
-  var element = document.getElementById("kolbody");
-  var x= document.getElementById("divcon");
-  para.href="/users/chatroom";
-  para.className="contacts";
-  element.insertBefore(para,x);
-  sw++;
-}
-var txt="";
-var adoc=document.getElementsByTagName('a');
-for(var i =3;i<cons.length+2;i++){
-
-
-adoc[i].innerHTML=cons[i-2];
-adoc[i].href=adoc[i].href+ "?nameuser=" +cons[i-2];
-  
- 
-}
-
-
- })
-}
-
-
- function exit(){
-  setcookie("login", " ", -1);
+function exit() {
+  setcookie("login", "", -1);
   window.location.assign("/users/login");
-
 }
 
-function setconcookie (obj){
-  var txt = obj.innerHTML;
-  setcookie("contact",txt,1);
+function setconcookie(obj) {
+  setcookie("contact", obj.innerHTML, 1);
 }
 
-function mover(obj){
- 
-  obj.style.backgroundColor="grey"
+function mover(obj) {
+  obj.style.backgroundColor = "grey";
 }
 
-function mout(obj){
-  obj.style.backgroundColor="indigo"
-
+function mout(obj) {
+  obj.style.backgroundColor = "indigo";
 }

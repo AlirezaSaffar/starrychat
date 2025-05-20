@@ -2,7 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose")
 const path = require("path")
 const userscontroler = require("./controler/usercontroler")
-const middleware =require("./middleware/checktoken")
+const middleware =require("./middleware/authmiddleware")
+const authroute = require("./routes/authroutes")
+const userroutes = require("./routes/userroutes")
+
 require("dotenv").config()
 const app = express();
 
@@ -47,22 +50,10 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "login.html"))
 })
 
-app.post("/api/users/refresh", userscontroler.refresh) 
 
-app.post("/api/users/chatroom", userscontroler.sendmessage) 
+app.use("/api/auth",authroute)
 
-app.post("/api/users/signup", userscontroler.signup) 
-
-app.post("/api/users/login", userscontroler.login)
-
-app.post("/api/users/search", userscontroler.search)
-
-app.post("/api/users/contacts", userscontroler.showcontacts)
-
-app.post("/api/users/user", userscontroler.userinfo)
-
-app.post("/api/users/settings", userscontroler.settings)
-
+app.use("/api/users",userroutes)
 
 const connectDB = (url) => {
     return mongoose.connect(url);

@@ -26,7 +26,7 @@ function signup(){
      var conpass= document.getElementById('passwordconfirm').value;
 
 if(pass==conpass){
-fetch("/api/users/signup", {
+fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           Accept: "application/json",

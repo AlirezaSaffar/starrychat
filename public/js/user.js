@@ -33,7 +33,7 @@ for(var i=0;i<cki.length;i++){
 }
 var c=cki.substring(i)
 document.getElementById('Title').innerHTML="user | "+c;
-fetch("/api/users/user", {
+fetch("/api/auth/user", {
     method: "POST",
     headers: {
       Accept: "application/json",

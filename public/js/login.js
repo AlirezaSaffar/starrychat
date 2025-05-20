@@ -34,7 +34,8 @@ function login() {
   p = document.getElementById("password").value;
   u = document.getElementById("user").value;
   var b= false;
-  fetch("/api/users/login", {
+  console.log("kjk")
+  fetch("/api/auth/login", {
     method: "POST",
     headers: {
       Accept: "application/json",
